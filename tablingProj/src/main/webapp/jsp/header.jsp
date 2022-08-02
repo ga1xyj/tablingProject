@@ -20,7 +20,7 @@ pageEncoding="UTF-8"%>
       <table class="head_table">
         <tr>
           <td>
-            <a href="#"><img src="https://i.ibb.co/9GBqh4x/logo.png" alt="" /></a>
+            <a href="${pageContext.request.contextPath }/index.do"><img src="https://i.ibb.co/9GBqh4x/logo.png" alt="" /></a>
           </td>
           <td class="td_search">
             <i class="uil uil-search"></i>

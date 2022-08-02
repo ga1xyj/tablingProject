@@ -14,15 +14,18 @@ public class StoreSearchController implements Controller{
 
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
 		HttpSession session = req.getSession();
-		
 		String keyword = req.getParameter("keyword");
+		if(keyword.equals("중앙로")) {
+			keyword="중앙대로";
+		}
+		session.setAttribute("keyword", keyword);
 		StoreService storeService = StoreService.getStoreService();
 		List<Store> list = storeService.findAllStores(keyword);
-		req.setAttribute("keyword", keyword);
-		req.setAttribute("list", list);
+		//req.setAttribute("keyword", keyword);
+		//req.setAttribute("list", list);
+		session.setAttribute("list", list);
 		Utils.forward(req, resp, "jsp/storeSearchOutput.jsp");
 		
-		session.setAttribute("list", list);
 	}
 
 }

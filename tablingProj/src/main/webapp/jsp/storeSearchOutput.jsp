@@ -41,6 +41,7 @@
 	      				<hr>
 	      				지역<br>
 	      				대구<br>
+	      				<input type="hidden" name="area" value="0">
 	      				<input type="checkbox" name="area" value="공평로" id="gong">
 	      				<label for="gong">공평로</label>
 	      				<input type="checkbox" name="area" value="국채보상로" id="gook">
@@ -71,6 +72,7 @@
 	      				<label for="keon">큰장로</label>
 	      				<hr>
 	      				음식종류<br>
+	      				<input type="hidden" name="food" value="0">
 	      				<input type="checkbox" name="food" value="한식" id="ko">
 	      				<label for="ko">한식</label>
 	      				<input type="checkbox" name="food" value="일식" id="jp">
@@ -113,7 +115,7 @@
 		</c:forEach>
 	</ul>
 	<script>
-	//id 배열?
+	//id 배열
 	let storeIdList= new Array();
 		<c:forEach items="${store.storeId }" var="storeId">
 			storeIdList.push("${store.storeId }");
