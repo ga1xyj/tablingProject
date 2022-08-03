@@ -46,18 +46,18 @@ public class StoreService {
 	      }
 	   return list;
    }
-//   //추천 맛집 조회
-//   public List<Store> findRecoStores(Criteria cri) {
-//	 List<Store> list = storeRepository.getRecoStores(cri);
-//     // 사진 url 세팅
-//     for (Store store : list) {
-//        String url = store.getStoreImgUrl().get(0);
-//        List<String> urlList = new ArrayList<String>();
-//        urlList.add(url.substring(0, url.indexOf("-")));
-//        store.setStoreImgUrl(urlList);
-//     }
-//	return list;
-//	}  
+//   //페이징
+   public List<Store> findAllPagingStores(Criteria cri, String keyword) {
+	 List<Store> list = storeRepository.searchPagingkeyword(cri, keyword);
+     // 사진 url 세팅
+     for (Store store : list) {
+        String url = store.getStoreImgUrl().get(0);
+        List<String> urlList = new ArrayList<String>();
+        urlList.add(url.substring(0, url.indexOf("-")));
+        store.setStoreImgUrl(urlList);
+     }
+	return list;
+	}  
 //
 //   public List<Store> printStoreList(){
 //	List<Store> list = storeRepository.getList();

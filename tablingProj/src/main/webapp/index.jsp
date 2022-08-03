@@ -8,6 +8,7 @@
 <meta charset="EUC-KR">
 <title>줄서: 맛집 검색 및 예약</title>
 <link href="${pageContext.request.contextPath }/css/index.css" rel="stylesheet">
+<link href="css/slide.css" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -45,8 +46,10 @@
       </nav>
         <!-- nav -->
        <div id="search-container">
-        <form action="${pageContext.request.contextPath }/storeSearch.do">
+        <form action="${pageContext.request.contextPath }/storeSearchPaging.do">
           <input type="text" id="window" name="keyword" placeholder="지역, 식당 또는 음식" />
+          <input type="hidden" name="pageNum" value="1">
+          <input type="hidden" name="amount" value="6">
           <input id="search" type="submit" value="검색">
          </form>
         </div>
@@ -54,59 +57,43 @@
     <hr>
     <div id="recommend-container">
     	<h2>추천 맛집 리스트</h2>
-    		<!-- slide -->
-    		<div id="slideShow">
-	    		<ul class="slides">
-				    <li><img src="http://www.rainbowfestival.co.kr/wp-content/uploads/2017/05/585be1aa1600002400bdf2a6-970x658.jpeg" alt=""></li>
-				    <li><img src="http://www.rainbowfestival.co.kr/wp-content/uploads/2017/05/585be1aa1600002400bdf2a6-970x658.jpeg" alt=""></li>
-				    <li><img src="http://www.rainbowfestival.co.kr/wp-content/uploads/2017/05/585be1aa1600002400bdf2a6-970x658.jpeg" alt=""></li>
-				    <li><img src="http://www.rainbowfestival.co.kr/wp-content/uploads/2017/05/585be1aa1600002400bdf2a6-970x658.jpeg" alt=""></li>
-				    <li><img src="http://www.rainbowfestival.co.kr/wp-content/uploads/2017/05/585be1aa1600002400bdf2a6-970x658.jpeg" alt=""></li>
-				    <li><img src="http://www.rainbowfestival.co.kr/wp-content/uploads/2017/05/585be1aa1600002400bdf2a6-970x658.jpeg" alt=""></li>
-    			</ul>  
-    			<p class="controller">
-			      <!-- &lt: 왼쪽 방향 화살표
-			      &gt: 오른쪽 방향 화살표 -->
-			      <span class="prev">&lt;</span>  
-			      <span class="next">&gt;</span>
-    			</p>
-  			</div>
-   	</div>
-   	<script>
-	   	const slides = document.querySelector('.slides'); //전체 슬라이드 컨테이너
-	   	const slideImg = document.querySelectorAll('.slides li'); //모든 슬라이드들
-	   	let currentIdx = 0; //현재 슬라이드 index
-	   	const slideCount = slideImg.length; // 슬라이드 개수
-	   	const prev = document.querySelector('.prev'); //이전 버튼
-	   	const next = document.querySelector('.next'); //다음 버튼
-	   	const slideWidth = 400; //한개의 슬라이드 넓이
-	   	const slideMargin = 100; //슬라이드간의 margin 값
-	
-	   	//전체 슬라이드 컨테이너 넓이 설정
-	   	slides.style.width = (slideWidth + slideMargin) * slideCount + 'px';
-	
-	   	function moveSlide(num) {
-	   	  slides.style.left = -num * 400 + 'px';
-	   	  currentIdx = num;
-	   	}
-	
-	   	prev.addEventListener('click', function () {
-	   	  /*첫 번째 슬라이드로 표시 됐을때는 
-	   	  이전 버튼 눌러도 아무런 반응 없게 하기 위해 
-	   	  currentIdx !==0일때만 moveSlide 함수 불러옴 */
-	
-	   	  if (currentIdx !== 0) moveSlide(currentIdx - 1);
-	   	});
-	
-	   	next.addEventListener('click', function () {
-	   	  /* 마지막 슬라이드로 표시 됐을때는 
-	   	  다음 버튼 눌러도 아무런 반응 없게 하기 위해
-	   	  currentIdx !==slideCount - 1 일때만 
-	   	  moveSlide 함수 불러옴 */
-	   	  if (currentIdx !== slideCount - 1) {
-	   	    moveSlide(currentIdx + 1);
-	   	  }
-	   	});
-   	</script>
+    	<!-- slide -->
+    	  <div id="container">
+    <div class="slide_wrap">    
+      <div class="slide_box">      
+        <div class="slide_list clearfix">        
+          <div class="slide_content slide01">          
+            <p>1</p>        
+          </div>        
+          <div class="slide_content slide02">          
+            <p>2</p>        
+          </div>        
+          <div class="slide_content slide03">          
+            <p>3</p>        
+          </div>        
+          <div class="slide_content slide04">          
+            <p>4</p>        
+          </div>        
+          <div class="slide_content slide05">          
+            <p>5</p>        
+          </div>      
+        </div>     
+         <!-- // .slide_list -->    
+        </div>    
+        <!-- // .slide_box -->    
+        <div class="slide_btn_box">     
+           <a class="slide_btn_prev">&lt;</a>      
+           <a type="button" class="slide_btn_next">&gt;</a>    
+          </div>    
+          <!-- // .slide_btn_box -->   
+           <ul class="slide_pagination"></ul>    
+           <!-- // .slide_pagination -->  
+          </div>  
+          <!-- // .slide_wrap -->
+        </div>
+        <!-- // .container -->
+        		
+     	<script src="js/slide.js"></script>
+    </div>
   </body>
 </html>

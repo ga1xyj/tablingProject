@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <title>${keyword } 맛집 인기 검색 순위</title>
 <link href="${pageContext.request.contextPath }/css/storeSearchOutput.css" rel="stylesheet">
+<!-- 페이징 css -->
+<link href="${pageContext.request.contextPath }/css/paging.css" rel="stylesheet">
 </head>
 <body>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -114,6 +116,21 @@
 			</li>
 		</c:forEach>
 	</ul>
+	<!-- 페이징 -->
+	<div class="center">
+	  	<div class="pagination">
+		  	<c:if test="${pageInfo.prev }">
+		  		<a href="storeSearchPaging.do?pageNum=${pageInfo.startPage - 1 }&amount=${pageInfo.cri.amount}">prev</a>
+		  	</c:if>
+		  	<c:forEach var="num" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+		  		<a href="storeSearchPaging.do?keyword=${keyword }&pageNum=${num }&amount=${pageInfo.cri.amount}">${num }</a>
+		 	</c:forEach>
+		 	<c:if test="${pageInfo.next }">
+		  		<a href="storeSearchPaging.do?keyword=${keyword }&pageNum=${pageInfo.endPage + 1 }&amount=${pageInfo.cri.amount}">next</a>
+		  	</c:if>
+	  	</div>
+	</div>
+	
 	<script>
 	//id 배열
 	let storeIdList= new Array();
