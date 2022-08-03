@@ -71,4 +71,16 @@ public class StoreService {
 //	return list;
 //	}  
 
+public List<Store> findAllFilterPagingStores(Criteria cri, String keyword, String[] area, String[] food) {
+	 List<Store> list = storeRepository.searchPagingkeywordFilter(cri, keyword, area, food);
+     // 사진 url 세팅
+     for (Store store : list) {
+        String url = store.getStoreImgUrl().get(0);
+        List<String> urlList = new ArrayList<String>();
+        urlList.add(url.substring(0, url.indexOf("-")));
+        store.setStoreImgUrl(urlList);
+     }
+	return list;
+}
+
 }

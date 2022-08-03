@@ -39,6 +39,7 @@ public class FrontController extends HttpServlet {
 		mappings.put("/storeFilterSearch.do", new storeFilterSearchController());
 		mappings.put("/storeSearch.do", new StoreSearchController());
 		mappings.put("/storeSearchPaging.do", new StoreSearchPagingController());
+		mappings.put("/storeFilterSearchPaging.do", new storeFilterSearchPagingController());
 	}
 
 	// 호출될 때마다 실행

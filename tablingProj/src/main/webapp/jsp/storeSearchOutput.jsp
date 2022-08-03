@@ -31,8 +31,13 @@
     			<div class="modal-dialog">
       				<div class="modal-content">
 					<!-- 폼 -->
-					<form action="${pageContext.request.contextPath }/storeFilterSearch.do">
+					<form action="${pageContext.request.contextPath }/storeFilterSearchPaging.do" method="post">
 						검색 필터<br>
+						<!-- 조건 설정 -->
+						<input type="hidden" name="job" value="filter">
+						<!-- pn, am -->
+						<input type="hidden" name="pageNum" value="1">
+						<input type="hidden" name="amount" value="6">
 						<c:forEach var="store" items="${list }">
 							<input type="hidden" name="storeId" value="${store.storeId }">
 						</c:forEach> 
@@ -116,21 +121,44 @@
 			</li>
 		</c:forEach>
 	</ul>
+	<!-- 필터 페이징 -->
+	<%--
+	<c:choose>
+		<c:when test="${job eq 'filter'}">
+			<div class="center">
+			  	<div class="pagination">
+				  	<c:if test="${pageInfo.prev }">
+				  		<a href="storeFilterSearchPaging.do?pageNum=${pageInfo.startPage - 1 }&amount=${pageInfo.cri.amount}">prev</a>
+				  	</c:if>
+				  	<c:forEach var="num" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+				  		<a href="storeFilterSearchPaging.do?keyword=${keyword }&pageNum=${num }&amount=${pageInfo.cri.amount}">${num }</a>
+				 	</c:forEach>
+				 	<c:if test="${pageInfo.next }">
+				  		<a href="storeFilterSearchPaging.do?keyword=${keyword }&pageNum=${pageInfo.endPage + 1 }&amount=${pageInfo.cri.amount}">next</a>
+				  	</c:if>
+			  	</div>
+			</div>
+		</c:when>
 	<!-- 페이징 -->
-	<div class="center">
-	  	<div class="pagination">
-		  	<c:if test="${pageInfo.prev }">
-		  		<a href="storeSearchPaging.do?pageNum=${pageInfo.startPage - 1 }&amount=${pageInfo.cri.amount}">prev</a>
-		  	</c:if>
-		  	<c:forEach var="num" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
-		  		<a href="storeSearchPaging.do?keyword=${keyword }&pageNum=${num }&amount=${pageInfo.cri.amount}">${num }</a>
-		 	</c:forEach>
-		 	<c:if test="${pageInfo.next }">
-		  		<a href="storeSearchPaging.do?keyword=${keyword }&pageNum=${pageInfo.endPage + 1 }&amount=${pageInfo.cri.amount}">next</a>
-		  	</c:if>
-	  	</div>
-	</div>
-	
+		<c:otherwise>
+		 --%>
+			<div class="center">
+			  	<div class="pagination">
+				  	<c:if test="${pageInfo.prev }">
+				  		<a href="storeSearchPaging.do?pageNum=${pageInfo.startPage - 1 }&amount=${pageInfo.cri.amount}">prev</a>
+				  	</c:if>
+				  	<c:forEach var="num" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+				  		<a href="storeSearchPaging.do?keyword=${keyword }&pageNum=${num }&amount=${pageInfo.cri.amount}">${num }</a>
+				 	</c:forEach>
+				 	<c:if test="${pageInfo.next }">
+				  		<a href="storeSearchPaging.do?keyword=${keyword }&pageNum=${pageInfo.endPage + 1 }&amount=${pageInfo.cri.amount}">next</a>
+				  	</c:if>
+			  	</div>
+			</div>
+			<%--
+		</c:otherwise>
+	</c:choose>
+	 --%>
 	<script>
 	//id 배열
 	let storeIdList= new Array();

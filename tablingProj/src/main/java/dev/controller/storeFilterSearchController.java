@@ -25,7 +25,7 @@ public class storeFilterSearchController implements Controller {
 		HttpSession session = req.getSession();
 		String keyword = (String)session.getAttribute("keyword");
 		List<Store> list = storeService.findFilterStores(keyword, area, food);
-		req.setAttribute("list", list);
+		session.setAttribute("list", list);
 		Utils.forward(req, resp, "jsp/storeSearchOutput.jsp");
 	}
 

@@ -177,5 +177,52 @@ public class StoreRepository extends DAO {
 		return list;
 	}
 	
+	//필터조회 페이징
+	public List<Store> searchPagingkeywordFilter(Criteria cri, String keyword, String[] area, String[] food) {
+		String sql ="select * from(select rownum rn, store_id, store_name, member_id, store_address, telephone, sit_capacity, available_time, holiday, represent_menu, store_img_url, food_category, approval_status"    
+				+" from ("
+				+ "SELECT * FROM"
+				+ "(SELECT * FROM stores WHERE store_name like '%" + keyword + "%'" + " OR store_address like '%" + keyword + "%'" + " OR represent_menu like '%" + keyword + "%'" + " OR food_category like '%" + keyword+ "%')";
+		if(area.length>1||food.length>1) {
+			sql += "WHERE store_address ='"+area[0]+"' OR food_category='"+food[0]+"'";
+			for (int i=1; i<area.length; i++) {
+				sql += " OR store_address LIKE '%"+ area[i]+ "%'";
+			}
+			for (int i=1; i<food.length; i++) {
+				sql += " OR food_category='"+food[i]+"'";
+			}
+		}
+		sql +=  ")"
+				+ " where rownum <= +"+cri.getAmount()*cri.getPageNum()+")"
+				+ " where rn > "+cri.getAmount()*(cri.getPageNum()-1);
+		List<Store> list = new ArrayList<>();
+		connect();
+		try {
+			st = conn.createStatement();
+			rs = st.executeQuery(sql);
+			while (rs.next()) {
+				Store store = new Store();
+				store.setStoreId(rs.getString("store_id"));
+				store.setStoreName(rs.getString("store_name"));
+				store.setMemberId(rs.getString("member_id"));
+				store.setStoreAddress(rs.getString("store_address"));
+				store.setTelephone(rs.getString("telephone"));
+				store.setSitCapacity(rs.getInt("sit_capacity"));
+				store.setAvailableTime(rs.getString("available_time"));
+				store.setHoliday(rs.getInt("holiday"));
+				store.setRepresnetMenu(rs.getString("represent_menu"));
+				store.setFoodCategory(rs.getString("food_category"));
+				List<String> urlList = new ArrayList<String>();
+				urlList.add(rs.getString("store_img_url"));
+				store.setStoreImgUrl(urlList);
+				store.setApprovalStatus(rs.getString("approval_status"));
+				list.add(store);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return list;
+	}
+	
 }
 	

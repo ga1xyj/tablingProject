@@ -46,7 +46,7 @@
       </nav>
         <!-- nav -->
        <div id="search-container">
-        <form action="${pageContext.request.contextPath }/storeSearchPaging.do">
+        <form action="${pageContext.request.contextPath }/storeSearchPaging.do" method="post">
           <input type="text" id="window" name="keyword" placeholder="지역, 식당 또는 음식" />
           <input type="hidden" name="pageNum" value="1">
           <input type="hidden" name="amount" value="6">
